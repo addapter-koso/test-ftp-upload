@@ -4,7 +4,9 @@
   "main": "gulp.js",
   "license": "ISC",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "build": "gulp build"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",

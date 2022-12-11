@@ -81,7 +81,7 @@ const paths = {
     dist: distDir
   },
   other: {
-    src: ["./src/**/*", "!./src/{pug,sass,js,img,ts,php}/*"],
+    src: ["!./src/{pug,sass,js,img,ts,php}/*", "./src/**/*"],
     dist: distDir
   }
 };
@@ -211,15 +211,15 @@ const jsBabel = (done) => {
       })
     )
     .pipe(cache("js"))
-    .pipe(
-      through2.obj((file, enc, callback) => {
-        browserify(file.path).transform(babelify).bundle((err, buf) => { 
-          file.contents = buf
-          callback(err,file)
-        });
-      })
-    )
-    // .pipe(babel())
+    // .pipe(
+    //   through2.obj((file, enc, callback) => {
+    //     browserify(file.path).transform(babelify).bundle((err, buf) => { 
+    //       file.contents = buf
+    //       callback(err,file)
+    //     });
+    //   })
+    // )
+    .pipe(babel())
     // JS圧縮
     .pipe(uglify())
     .pipe(terser())
@@ -345,3 +345,7 @@ exports.pug = pugFormat;
 exports.image = imagesCompress;
 exports.js = jsBabel;
 exports.other = copyOtherFile;
+
+exports.build = series(
+  parallel(htmlFormat, ejsFormat, pugFormat, sassCompile, jsBabel, imagesCompress, copyOtherFile)
+);
