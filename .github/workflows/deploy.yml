@@ -10,12 +10,21 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+
+      - name: Use Node.js 18.2.0
+        uses: actions/setup-node@v1     # Node.jsの環境をセットアップする
+        with:
+          node-version: '18.2.0'         # v12.13のバージョンのNode環境を使用する
+
       - name: Build Project
-        working_directory: ./
         run: |
           yarn install
           yarn build
-      - uses: actions/checkout@master
+      
+      - name: List output files
+        run: ls                           # ファイルリストを表示
+
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         env:
