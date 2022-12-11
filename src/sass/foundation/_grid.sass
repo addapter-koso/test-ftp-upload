@@ -1,0 +1,26 @@
+@mixin blocks($col, $gutter: 3%, $class:'blocks')
+    [class*='#{$class}-']
+        padding-left: 0
+        list-style: none
+    [class*='#{$class}-']:after
+        content: ""
+        display: table
+        clear: both
+    [class*='#{$class}-'] > li
+        height: auto
+        float: left
+        margin-bottom: 1em
+        margin-right: $gutter
+    [class*='#{$class}-'] > li li
+        float: none
+        margin: 0
+    @for $i from 1 through $col
+        $grid: (100% - (($i - 1) * $gutter)) / $i
+        $num: $col - $i + 1
+        $width: ($grid * $num) + ($gutter * ($num - 1))
+        .#{$class}-#{$i} > li
+        width: $grid
+
+// @include blocks(6, 3%)
+// [class*='blocks-'] > li:nth-child(3n)
+//     margin-right: 0

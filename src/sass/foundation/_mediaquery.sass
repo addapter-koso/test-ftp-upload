@@ -1,0 +1,14 @@
+@charset "UTF-8"
+// ****************************************
+// Grid system
+// ****************************************
+
+@use "../setting/variables" as vars
+
+@mixin mq-up($bp)
+  @media #{map-get(vars.$breakpoint_up, $bp)}
+    @content
+
+@mixin mq-down($bp)
+  @media #{map-get(vars.$breakpoint_down, $bp)}
+    @content

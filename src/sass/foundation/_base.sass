@@ -1,0 +1,12 @@
+@charset "UTF-8"
+
+@use 'normalize'
+@use "../setting/variables" as vars
+@use "mediaquery" as mq
+
+
+body
+  +mq.mq-up(md)
+    background-color: red
+  +mq.mq-down(sm)
+    background: green

@@ -1,0 +1,26 @@
+head
+  //- Document Settings
+  meta(charset="UTF-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  meta(name="format-detection", content="telephone=no")
+  //- SEO
+  title #{meta.title}
+  meta(name="description", content=meta.description)
+  meta(name="canonical", content=meta.url)
+  //- OGP
+  meta(property="og:title", content=meta.title)
+  meta(property="og:type", content="website")
+  meta(property="og:description", content=meta.description)
+  meta(property="og:url", content=meta.url)
+  meta(property="og:image", content=meta.ogImage)
+  meta(property="og:site_name", content=meta.ogSiteName)
+  meta(name="twitter:card", content=meta.ogTwitterCard)
+  //- meta(name="twitter:site", content=meta.ogTwitterSite)
+  //- Favicon
+  link(rel="shortcut icon", href="./favicon.ico")
+  link(rel="apple-touch-icon", href="./favicon.ico")
+  //- CSS 読み込み
+  link(rel="stylesheet", href="css/" + slug + ".css")
+  //- JS 読み込み
+  script(src="js/" + slug + ".js") 
