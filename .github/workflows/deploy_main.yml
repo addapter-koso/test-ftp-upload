@@ -1,9 +1,9 @@
-name: Build and Deploy  
+name: Build and Deploy to main
 
 on:
   push:                 
     branches:           
-      - main    
+      - main                           # デプロイするブランチを指定
 
 jobs:
   FTP-Deploy-Action:
@@ -13,9 +13,9 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Use Node.js 18.2.0
-        uses: actions/setup-node@v1     # Node.jsの環境をセットアップする
+        uses: actions/setup-node@v1      # Node.jsの環境をセットアップする
         with:
-          node-version: '18.2.0'         # v12.13のバージョンのNode環境を使用する
+          node-version: '18.2.0'         # v18.2.0のバージョンのNode環境を使用する
 
       - name: Build Project
         run: |

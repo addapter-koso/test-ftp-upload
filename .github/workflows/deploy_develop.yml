@@ -1,0 +1,35 @@
+name: Build and Deploy to main
+
+on:
+  push:                 
+    branches:           
+      - develop                           # デプロイするブランチを指定
+
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Use Node.js 18.2.0
+        uses: actions/setup-node@v1      # Node.jsの環境をセットアップする
+        with:
+          node-version: '18.2.0'         # v18.2.0のバージョンのNode環境を使用する
+
+      - name: Build Project
+        run: |
+          yarn install
+          yarn build
+      
+      - name: List output files
+        run: ls                           # ファイルリストを表示
+
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}     
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /addapter.jp/public_html/test/ftp_deploy_test/
+          local-dir: dist/
